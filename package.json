@@ -1,0 +1,29 @@
+{
+  "name": "msgroom-gpt",
+  "version": "0.1.1",
+  "description": "ChatGPT for msgroom",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/its-pablo/msgroom-gpt.git"
+  },
+  "keywords": [
+    "gpt",
+    "chatgpt",
+    "msgroom"
+  ],
+  "author": "its-pablo",
+  "license": "SEE LICENSE IN LICENSE",
+  "bugs": {
+    "url": "https://github.com/its-pablo/msgroom-gpt/issues"
+  },
+  "homepage": "https://github.com/its-pablo/msgroom-gpt#readme",
+  "type": "module",
+  "dependencies": {
+    "chatgpt": "^5.2.2",
+    "msgroom-bot": "^0.0.7"
+  }
+}
