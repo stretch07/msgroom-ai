@@ -1,10 +1,11 @@
 {
   "name": "msgroom-gpt",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "ChatGPT for msgroom",
   "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/index.js"
   },
   "repository": {
     "type": "git",
@@ -23,6 +24,7 @@
   "homepage": "https://github.com/its-pablo/msgroom-gpt#readme",
   "type": "module",
   "dependencies": {
+    "bing-chat": "^0.2.3",
     "chatgpt": "^5.2.2",
     "msgroom-bot": "^0.0.7"
   }
