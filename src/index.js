@@ -11,8 +11,8 @@ const bingApi = new BingChat({
 })
 
 bot.connect("chatgpt")
-const cmse = bot.registerCommandSet("gpt!")
-cmse.registerCommand("send", async (...args) => {
+const cmse = bot.registerCommandSet("gpt ")
+cmse.registerCommand("openai", async (...args) => {
   bot.send("One moment...")
   const res = await chatApi.sendMessage(args.join(" "))
   bot.send(res.text)
