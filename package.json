@@ -1,7 +1,7 @@
 {
-  "name": "msgroom-gpt",
-  "version": "0.1.2",
-  "description": "ChatGPT for msgroom",
+  "name": "msgroom-ai",
+  "version": "0.2.4",
+  "description": "ai for msgroom",
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -26,6 +26,7 @@
   "dependencies": {
     "bing-chat": "^0.2.3",
     "chatgpt": "^5.2.2",
+    "googlebard": "^1.0.4",
     "msgroom-bot": "^0.0.7"
   }
 }
