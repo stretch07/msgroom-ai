@@ -1,45 +1,53 @@
-import MsgroomBot from "msgroom-bot"
-import { BingChat } from "bing-chat"
-import { ChatGPTAPI } from "chatgpt"
-import { Bard } from "googlebard"
-const bot = new MsgroomBot
+import { msgroomBot } from "msgroom-bot"
+import { apis } from "./providerApis.js"
+import { config } from "./config.js"
+const bot = new msgroomBot
 
-let chatApi
-if (process.env.OPENAI_API_KEY) {
-  chatApi = new ChatGPTAPI({
-    apiKey: process.env.OPENAI_API_KEY
-  })
+async function ai(service, msg, think = config.THINK) {
+  let result
+  if (think) {
+    bot.send("Please wait...")
+  }
+  /*try {*/
+    switch (service) {
+      case "chatgpt":
+        result = await apis.chatgpt.sendMessage(msg)
+        break
+      case "bing":
+        result = await apis.bing.sendMessage(msg)
+        break
+      case "bard":
+        result = await apis.bard.ask(msg)
+        break
+      default:
+        bot.send("No provider found")
+        break
+    }
+  /*} catch (e) {
+    bot.send(`We ran into a problem, try again later.`)
+  }*/
 }
-let bingApi
-if (process.env.BING_COOKIE) {
-  bingApi = new BingChat({
-    cookie: process.env.BING_COOKIE
-  })
-}
-let bardApi
-if (process.env.BARD_COOKIE) {
-  bardApi = new Bard(process.env.BARD_COOKIE)
-}
+
 bot.connect("[BOT] ai (ai help)")
+
 const cmse = bot.registerCommandSet("ai ") //space is required yes
+
 cmse.registerCommand("openai", async (...args) => {
-  bot.changeNick("ai [thinking]")
-  const res = await chatApi.sendMessage(args.join(" "))
-  bot.changeNick("ai")
-  bot.send(res.text)
+  ai("chatgpt", args.join(" "))
+})
+cmse.registerCommand("chatgpt", async (...args) => {
+  ai("chatgpt", args.join(" "))
 })
 cmse.registerCommand("bing", async (...args) => {
-  bot.changeNick("ai [thinking]")
-  const res = await bingApi.sendMessage(args.join(" "))
-  bot.changeNick("ai")
-  bot.send(res.text)
+  ai("bing", args.join(" "))
 })
 cmse.registerCommand("bard", async (...args) => {
-  bot.changeNick("ai [thinking]")
-  const res = await bardApi.ask(args.join(" "))
-  bot.changeNick("ai")
-  bot.send(res.text)
+  ai("bard", args.join(" "))
 })
 cmse.registerCommand("help", () => {
-  bot.send("current commands: ai bing, ai bard")
+  bot.send(`Current commands:
+  * ai openai [prompt]
+  * ai bing [prompt]
+  * ai bard [prompt]
+  `)
 })
