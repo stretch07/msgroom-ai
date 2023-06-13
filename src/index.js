@@ -20,8 +20,7 @@ let bardApi
 if (process.env.BARD_COOKIE) {
   bardApi = new Bard(process.env.BARD_COOKIE)
 }
-
-bot.connect("ai")
+bot.connect("[BOT] ai (ai help)")
 const cmse = bot.registerCommandSet("ai ") //space is required yes
 cmse.registerCommand("openai", async (...args) => {
   bot.changeNick("ai [thinking]")
@@ -40,4 +39,7 @@ cmse.registerCommand("bard", async (...args) => {
   const res = await bardApi.ask(args.join(" "))
   bot.changeNick("ai")
   bot.send(res.text)
+})
+cmse.registerCommand("help", () => {
+  bot.send("current commands: ai bing, ai bard")
 })
